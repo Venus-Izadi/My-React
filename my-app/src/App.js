@@ -17,16 +17,20 @@ class App extends Component {
             <div>
                 <Widget update={this.update.bind(this)}/>
                 <h2>{this.state.myState}</h2>
+                <CustomisedButton>Click here</CustomisedButton>
             </div>);
     }
-};
-
+}
 App.propTypes = {
     text: PropTypes.string.isRequired,
 };
 
 const Widget = (props) =>
-    <input type="text" onChange={props.update}/>
+    <input type="text" onChange={props.update}/>;
+
+const CustomisedButton = (props) => {
+    return <button>{props.children}</button>
+};
 
 export default App;
 
