@@ -16,20 +16,27 @@ class App extends Component {
         return (
             <div>
                 <Widget update={this.update.bind(this)}/>
-                <h2>{this.state.myState}</h2>
+                <h2>{this.props.text}</h2>
                 <CustomisedButton>Click here</CustomisedButton>
             </div>);
     }
 }
-App.propTypes = {
-    text: PropTypes.string.isRequired,
-};
-
 const Widget = (props) =>
     <input type="text" onChange={props.update}/>;
 
 const CustomisedButton = (props) => {
     return <button>{props.children}</button>
+};
+
+App.propTypes = {
+    text(props, propName, component) {
+        if(!(propName in props)) {
+            return new Error(`missing ${propName}`);
+        }
+        if(props[propName] && props[propName].length < 4) {
+            return new Error(`${propName} is too short`);
+        }
+    },
 };
 
 export default App;

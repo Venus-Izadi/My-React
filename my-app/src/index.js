@@ -4,6 +4,6 @@ import App from './App';
 import './index.css';
 
 ReactDOM.render(
-  <App text="sample text"/>,
+  <App text="as"/>,
   document.getElementById('root')
 );
