@@ -15,16 +15,18 @@ class App extends Component {
     render() {
         return (
             <div>
-                <input placeholder={this.state.myState} onChange={this.update.bind(this)}/>
+                <Widget update={this.update.bind(this)}/>
                 <h2>{this.state.myState}</h2>
             </div>);
     }
-}
-;
+};
 
 App.propTypes = {
     text: PropTypes.string.isRequired,
 };
+
+const Widget = (props) =>
+    <input type="text" onChange={props.update}/>
 
 export default App;
 
