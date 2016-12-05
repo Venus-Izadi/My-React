@@ -5,39 +5,25 @@ class App extends Component {
 
     constructor(){
         super();
-        this.state = {myState: "initial state"};
+        this.state = { a: 'initialised'};
     };
 
-    update(e){
-      this.setState({myState: e.target.value});
+    update(){
+      this.setState({ a: this.widget.refs.input.value});
     };
 
     render() {
         return (
             <div>
-                <Widget update={this.update.bind(this)}/>
-                <h2>{this.props.text}</h2>
-                <CustomisedButton>Click here</CustomisedButton>
+                <Widget ref={ component => this.widget = component} update={this.update.bind(this)}/>
+                <h2>{this.state.a}</h2>
             </div>);
     }
 }
-const Widget = (props) =>
-    <input type="text" onChange={props.update}/>;
-
-const CustomisedButton = (props) => {
-    return <button>{props.children}</button>
-};
-
-App.propTypes = {
-    text(props, propName, component) {
-        if(!(propName in props)) {
-            return new Error(`missing ${propName}`);
-        }
-        if(props[propName] && props[propName].length < 4) {
-            return new Error(`${propName} is too short`);
-        }
-    },
-};
-
 export default App;
 
+export class Widget extends Component {
+    render(){
+
+    return( <input type="text" ref="input" onChange={this.props.update}/>);
+};}
